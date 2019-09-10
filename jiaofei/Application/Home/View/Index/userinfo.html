@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>个人信息</title>
+    <link rel="stylesheet" type="text/css" href="{$Think.HOME_URL}/css/aui.css"/>
+    <style>
+    	body{
+    		
+    	}
+    	
+    	header{position:fixed!important;top:0}
+ 
+ 
+    	    	
+    	
+    	.userInfo{background-color: #03A9F4;width: 100%;height: 170px;text-align: center;position: relative}
+    	.headimg{padding-top: 50px;text-align: center}
+    	.headimg img{width: 95px;height: 95px;border-radius: 50%;display: inline-block;}
+ 
+    </style>
+</head>
+<body>
+ 
+
+    <header class="aui-bar aui-bar-nav">
+        <a class="aui-pull-left aui-btn"  href="__CONTROLLER__/main3.html">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">缴费</div>
+    </header>
+
+	
+	
+	<div class="userInfo">
+	   <div class="headimg"><img src="{$Think.IMG_URL}{$result.headimg}" /></div>
+ 
+	</div>
+	
+	
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+ 
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    姓名：{$result.user_name}
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    身份证号：{$result.sfz_num}
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    学院：{$result.xueyuan_name}
+            </li>            
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    专业：{$result.zhuanye}
+            </li>            
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    学级：{$result.xueji}
+            </li>            
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    班级：{$result.banji}
+            </li>   
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    学号：{$result.xue_num}
+            </li>             
+            
+            
+                     
+        </ul>
+    </div>	
+	
+	
+ 
+	
+</body>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/api.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/vue.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/aui-toast.js" ></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/hy.js"></script>
+<script type="text/javascript">
+ 
+</script>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title>添加用户</title>
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/pintuer.css">
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/admin.css">
+<script src="{$Think.PUBLIC_URL}/js/jquery.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/pintuer.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/zepto.min.js"></script> 
+</head>
+
+<style>
+    
+</style>
+
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加用户</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action=""  enctype="multipart/form-data" >  
+ 
+      <div class="form-group">
+        <div class="label">
+          <label>学生姓名：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$result.user_name}" maxlength="6" name="user_name" data-validate="required:请输入学生姓名" />
+          <div class="tips"></div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <div class="label">
+          <label>身份证号：</label>
+        </div>
+        <div class="field">
+          <input type="tel" class="input w50" value="{$result.sfz_num}"     maxlength="18" name="sfz_num" {$result?readonly:''} data-validate="required:请输入学生身份证号,regexp#^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$:(请输入正确的身份证格式)" oninput = "value=value.replace(/[^\d]/g,'')" />
+          <div class="tips"></div>
+        </div>
+      </div>  
+ 
+         <div class="form-group">
+          <div class="label">
+            <label>所属学院：</label>
+          </div>
+          <div class="field">
+            <select id="xueyuan_id" name="xueyuan_id" class="input w50"  value=""  data-validate="required:请选择学生所属学院">
+ 
+               <?php  for($i=0;$i<count($xueyuanList);$i++){   ?> 
+                   <option value="{$xueyuanList[$i].xueyuan_id}">{$xueyuanList[$i].xueyuan_name}</option>
+               <?php  }  ?>
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>           
+        
+        
+ 
+        
+      <div class="form-group">
+        <div class="label">
+          <label>学号：</label>
+        </div>
+        <div class="field">
+          <input type="tel" class="input w50" value="{$result.xue_num}"  name="xue_num"  />
+          <div class="tips"></div>
+        </div>
+      </div>         
+        
+        
+        
+      <div class="form-group">
+        <div class="label">
+          <label>学级：</label>
+        </div>
+        <div class="field">
+          <input type="tel" class="input w50" value="{$result.xueji}" maxlength="4" name="xueji" data-validate="required:请输入学生学级" oninput = "value=value.replace(/[^\d]/g,'')" />
+          <div class="tips"></div>
+        </div>
+      </div> 
+        
+      <div class="form-group">
+        <div class="label">
+          <label>班级：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$result.banji}"  name="banji"  />
+          <div class="tips"></div>
+        </div>
+      </div>         
+        
+      <div class="form-group">
+        <div class="label">
+          <label>专业：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$result.zhuanye}"  name="zhuanye" data-validate="required:请输入学生专业" />
+          <div class="tips"></div>
+        </div>
+      </div>         
+      <div class="form-group">
+        <div class="label">
+          <label>联系电话：</label>
+        </div>
+        <div class="field">
+          <input type="tel" class="input w50" value="{$result.phone}" maxlength="11" name="phone" data-validate="required:请输入学生联系电话" oninput = "value=value.replace(/[^\d]/g,'')" />
+          <div class="tips"></div>
+        </div>
+      </div> 
+     
+       
+ 
+       
+ 
+        
+ 
+      
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+            <button class="button bg-main icon-check-square-o" type="submit" onclick="return tijiao()"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+   //设置select选中的
+ 
+  $('#xueyuan_id').val({$now_xueyuan_id})   
+ 
+
+ 
+ 
+ 
+ 
+
+</script>
+</html>

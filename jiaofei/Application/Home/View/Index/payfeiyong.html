@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>支付费用</title>
+    <link rel="stylesheet" type="text/css" href="{$Think.HOME_URL}/css/aui.css"/>
+    <style>
+    	body{
+    		
+    	}
+    	header{position:fixed!important;top:0}
+    	.title{margin-top: -5px!important;font-size: 16px}
+    	.aui-list-item-title{font-size: 14px!important;color: #757575!important}
+    	.aui-list-item-text{margin-top: 5px;}
+    	.aui-list-item-text p{font-size: 14px!important}
+    	.price{color:black!important;font-size: 15px!important}
+    	.redfont{color: #FD1A1B}
+    	
+ 
+    	.aui-content{margin-top: 45px;}
+        .aui-btn-info{margin-top: 15px}
+    	
+    </style>
+</head>
+<body>
+	
+   <header class="aui-bar aui-bar-nav">
+        <a class="aui-pull-left aui-btn" href="__CONTROLLER__/main1.html">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">缴费</div>
+    </header>
+	
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-media-list">
+ 
+            <li class="aui-list-item aui-list-item-arrow">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="title">{$result.qishu}</div>
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">{$result.begin_date}~{$result.end_date}</div>
+                            <div class="aui-list-item-right price">{$result.money}元</div>
+                        </div>
+                        <div class="aui-list-item-text aui-ellipsis-2" style="display: block">
+                             <p>缴费类目:{$result.leimu_name}</p>
+                             <p>缴费状态:<span>未缴费</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="aui-btn aui-btn-info aui-btn-block" onclick="topay()">进行支付</div>
+                
+                
+            </li>
+
+ 
+ 
+        </ul>
+    </div>	
+	
+	
+	
+	
+ 
+	
+	
+</body>
+
+<script type="text/javascript" src="{$Think.HOME_URL}/script/aui-toast.js" ></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/hy.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/zepto.min.js"></script>
+<script type="text/javascript">
+ 
+     function topay(){
+         /**
+             $.ajax({
+                type: 'post',
+                url: '{$Think.SERVICE}/jiaofei/demo/xykOrder.php',
+                async: true,
+                data: { action: 'create',order_id:'2211541212' },
+                success: function (result) {
+                         alert(JSON.stringify(result));	
+                          result = JSON.parse(result);
+			  console.log(result.ret_content.url);
+ 
+                },
+                error: function () {
+                    thisDom.removeClass("disabled");
+                    alert("创建失败");
+                }
+            });**/
+        
+         var url="__MODULE__/Pay/test"
+         var order_num=Math.floor(Math.random()*90000000000)+10000000000+(new Date()).valueOf();
+         var user_id={$Think.session.user_id};
+         var payorder_id={$result.payorder_id};
+         var money={$result.money};
+         var leimu_name='{$result.leimu_name}';
+         hb_ajax('{$Think.SERVICE}/jiaofei/demo/xykOrder.php',{action: 'create',order_id:order_num,user_id:user_id,payorder_id:payorder_id,money:money*100,leimu_name:leimu_name},function(ret){
+           //alert(JSON.stringify(ret));
+                        var payurl=ret.ret_content.url;
+                         window.location.href=payurl;
+            },function(err){
+                alert(JSON.stringify(err));
+                alert('错误')
+            });
+ 
+ 
+ 
+ 
+ 
+     }
+ 
+  //ajax发送请求获取响应数据
+function hb_ajax(url,datas,sucback,errback,type,async){
+	$.ajax({
+		type:type?type:'POST',
+		url:url,
+		data:datas,
+		dataType:'json',
+		timeout:30000,
+		success:sucback,
+		error:errback,
+		async:async?async:true
+	});
+}
+ 
+ 
+</script>
+</html>

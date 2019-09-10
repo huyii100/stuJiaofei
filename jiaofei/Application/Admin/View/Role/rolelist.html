@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>权限组列表</title>  
+    <link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/pintuer.css">
+    <link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/admin.css">
+    <script src="{$Think.PUBLIC_URL}/js/jquery.js"></script>
+    <script src="{$Think.PUBLIC_URL}/js/pintuer.js"></script> 
+</head>
+<style>
+    
+    .border-green{color: green}
+</style>
+
+<body>
+<form method="post" action="">
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder">权限组列表</strong></div>
+
+
+    
+    <table class="table table-hover text-center">
+      <tr>
+        <th width="50">序号</th>
+        <th >权限组名称</th>
+       <th>操作</th>      
+      </tr>   
+      
+<?php   for($i=0;$i<count($data);$i++){      ?>
+       <tr>
+          <td>{$i+1}</td>      
+          <td>{$data[$i]['role_name']}</td>    
+          
+          <td><div class="button-group">
+           <a class="button border-main" href="__CONTROLLER__/roleByid/rid/{$data[$i]['rid']}"  onclick="window.open(this.href,'_blank','scrollbars=1,resizable=0;height=900,width=800,top=190,left=350');return false"><span class="icon-edit"></span>修改</a>
+           <a class="button border-red" onclick="return del({$data[$i]['rid']})" ><span class="icon-trash-o"></span>删除</a>          
+              </div></td>
+              
+              
+        </tr>
+      
+      
+  <?php  }  ?>
+        
+        
+        
+        
+      <tr>
+        <td colspan="8"><div class="pagelist"> 
+            {$page}
+            </div></td>
+      </tr>
+      
+    </table>
+  </div>
+</form>
+<script type="text/javascript">
+
+function del(rid){
+    
+   	if(confirm("删除角色将会删除该角色下所有管理员，是否确定要删除？")){
+            var url="__CONTROLLER__/delrole/rid/"+rid;
+            window.location.href=url;	   
+	}
+       
+}
+
+
+
+
+
+
+
+function changesearch(){
+    
+
+var hospital_id=$('#hospital_id').val();//选中的值
+if(hospital_id==0){return}
+var url='__CONTROLLER__/roomlist/hospital_id/'+hospital_id;
+window.location.href=url;
+
+
+}
+
+</script>
+</body></html>

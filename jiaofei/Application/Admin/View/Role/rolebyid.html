@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title>修改角色</title>
+    <link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/pintuer.css">
+    <link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/admin.css">
+    <script src="{$Think.PUBLIC_URL}/js/jquery.js"></script>  
+    <script src="{$Think.PUBLIC_URL}/js/pintuer.js"></script>
+
+<style>
+
+.far input{margin-left: 3px}
+.son{padding-top:8px;padding-left: 15px}
+.son input{padding-left: 5px}
+.label{width: 13%!important}
+</style>
+
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>修改角色</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="">  
+      
+
+              <div class="form-group">
+        <div class="label">
+          <label>角色名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$datarole[0]['role_name']}" name="role_name" data-validate="required:请输入权限组名称" />
+          <div class="tips"></div>
+        </div>
+      </div>
+        
+         <section style="padding-left: 45px;padding-bottom: 20px">
+        <div class="form-group">
+       
+          <strong>请修改该角色的权限：</strong> 
+       
+
+      </div>
+        
+        
+       
+        
+        
+        <?php   for($i=0;$i<count($dataone);$i++){      ?>
+        
+        <div class="form-group">
+            
+          <div class="label">
+              <strong style="color:#0080FF">{$dataone[$i]['auth_name']}</strong>
+              <input class="farinput"  <?php if(in_array($dataone[$i]['aid'],$haveids)==true){ ?>checked="checked"<?php } ?>     value="{$dataone[$i]['aid']}" name="auth_id[]"  type="checkbox" />|
+          </div>
+            
+            
+          <div class=" son"  > 
+              <?php   for($j=0;$j<count($datatwo);$j++){      ?>
+             <if condition="$datatwo[$j]['auth_fid']  eq  $dataone[$i]['aid'] ">
+                 {$datatwo[$j]['auth_name']}
+                 <input class="soninput"  <?php if(in_array($datatwo[$j]['aid'],$haveids)==true){ ?>checked="checked"<?php } ?>  value="{$datatwo[$j]['aid']}"  name="auth_id[]" type="checkbox" onclick="xuanson(this)"   />
+             </if>
+                  <?php  }  ?>
+         
+          </div>
+            
+        </div>
+        
+       <?php  }  ?>
+       
+        
+        <div class="tips">
+            <label style="padding-left: 35px;color: red;margin-bottom: 10px"><span>注：选中子权限时，必须选中父权限(蓝色字体)才会生效</span> </label> 
+        </div>
+       
+   </section>
+     
+
+        
+      <div class="form-group">
+         
+        <div class="label">
+          
+        </div>
+        <div class="field">
+            
+          <button class="button bg-main icon-check-square-o" type="submit">提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+
+<script>
+    
+    
+    function xuanson(obj){
+       // alert(66666);
+       //alert(obj.parentNode.parentNode);
+     // var father=obj.parentNode.parentNode; 
+     // alert(father);
+   //var far=obj.parentNode.parentNode.childNodes[1].childNodes[1]; //children(".farinput").attr("checked",'true');
+   
+   //var sons=obj.parentNode.childNodes;
+   
+
+ 
+
+
+   /*
+        if(obj.checked==true){
+        far.checked=true;
+           }
+    */
+        
+        
+    }
+    
+    
+    
+    $(document).ready(function(){
+               
+  $(".soninput").click(function(){
+      
+   var far= $(this).parent().prev().children(":first");
+   
+  
+
+   alert($test.length);
+   far.attr("checked", true);
+    
+  });
+  
+  
+  
+});
+   
+    
+    
+</script>
+
+
+</html>

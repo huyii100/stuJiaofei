@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title>管理员列表</title>
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/pintuer.css">
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/admin.css">
+<script src="{$Think.PUBLIC_URL}/js/jquery.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/pintuer.js"></script>
+</head>
+<style>
+    
+    .greenfont{color: green}
+
+</style>
+<body>
+<form method="post" action="" id="listform">
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder"> 管理员列表</strong></div>
+
+    <table class="table table-hover text-center">
+      <tr>
+        <th style="text-align:left; padding-left:20px;">序号</th>
+        <th>用户名</th>
+ 
+        <th>所属角色</th>
+ 
+        <th>创建时间</th>
+ 
+        <th>操作</th>
+      </tr>
+      
+       <?php  for($i=0;$i<count($data);$i++){   ?>
+        <tr>
+          <td style="text-align:left; padding-left:20px;">{$i+1}</td>
+          <td>{$data[$i]['username']}</td>
+          <td>{$data[$i]['role_name']}</td>
+          <td>{$data[$i]['admin_createtime']}</td>
+ 
+          <td><div class="button-group"> 
+                  <a class="button border-main"  href="__CONTROLLER__/managerbyid/admin_id/{$data[$i]['admin_id']}"  onclick="window.open(this.href,'_blank','scrollbars=0,resizable=0;height=900,width=800,top=190,left=350');return false"><span class="icon-edit"></span> 修改</a> 
+
+                  <a class="button border-red" onclick="del({$data[$i]['admin_id']})" ><span class="icon-trash-o"></span> 删除</a> 
+
+                  <a class="button border-main"  onclick="reloadPwd({$data[$i]['admin_id']})" >   <span class="icon-eye"></span>重置密码</a>
+              </div>
+          </td>
+                  
+        </tr>	
+       <?php  }  ?>
+       
+
+      <tr>
+        <td colspan="8"><div class="pagelist">{$page}</div></td>
+      </tr>
+    </table>
+  </div>
+</form>
+<script type="text/javascript">
+
+
+
+function del(admin_id){
+    
+   	if(confirm("是否确定要删除该管理员？")){
+            var url="__CONTROLLER__/delManager/admin_id/"+admin_id;
+            window.location.href=url;	   
+	}
+       
+}
+//重置密码
+function reloadPwd(admin_id){
+    
+   	if(confirm("是否确定要重置该管理员的密码？")){
+            var url="__CONTROLLER__/reloadPwd/admin_id/"+admin_id;
+            window.location.href=url;	   
+	}
+       
+}
+
+
+</script>
+</body>
+</html>

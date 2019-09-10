@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>未缴费列表</title>
+    <link rel="stylesheet" type="text/css" href="{$Think.HOME_URL}/css/aui.css"/>
+    <style>
+    	body{
+    		
+    	}
+    	header{position:fixed!important;top:0}
+    	.title{margin-top: -5px!important;font-size: 16px}
+    	.aui-list-item-title{font-size: 14px!important;color: #757575!important}
+    	.aui-list-item-text{margin-top: 5px;}
+    	.aui-list-item-text p{font-size: 14px!important}
+    	.price{color:black!important;font-size: 15px!important}
+    	.redfont{color: #FD1A1B}
+    	
+ 
+    	.aui-content{margin-top: 45px;padding-bottom: 35px;z-index: 1!important}
+    	
+    	footer{position:fixed!important;bottom:0;z-index: 999!important;width: 100%;background-color: white}
+    	
+    	.smalldiv{width: 32.5%;height: 45px;line-height: 45px;display: inline-block;text-align: center;background-color: white;font-size: 16px}
+    	.active{background-color:#03A9F4;color: white;}
+    	
+    </style>
+</head>
+<body>
+	
+	<header class="aui-bar aui-bar-nav">缴费</header>
+	
+    <div class="aui-content aui-margin-b-15">
+        
+        <if condition="!$data"> 
+         <p align="center" style="margin-top: 20px">暂无未交费订单数据</p>
+       </if>        
+        
+        <ul class="aui-list aui-media-list">
+         <?php  for($i=0;$i<count($data);$i++){   ?>
+            <li class="aui-list-item aui-list-item-arrow" onclick="location.href='__CONTROLLER__/payfeiyong/payorder_id/{$data[$i].payorder_id}'">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="title">{$data[$i].qishu}</div>
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">{$data[$i].begin_date}~{$data[$i].end_date}</div>
+                            <div class="aui-list-item-right price">{$data[$i].money}元</div>
+                        </div>
+                        <div class="aui-list-item-text aui-ellipsis-2" style="display: block">
+                             <p>缴费类目:{$data[$i].leimu_name}</p>
+                             <p>缴费状态:{$data[$i]['is_yuqi']==0?'<span>未交费</span>':'<span class="redfont">已逾期</span>'}</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <?php  }  ?> 
+
+<!--            <li class="aui-list-item aui-list-item-arrow">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="title">第三学年</div>
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">2018-9~2019-6</div>
+                            <div class="aui-list-item-right price">10530元</div>
+                        </div>
+                        <div class="aui-list-item-text aui-ellipsis-2" style="display: block">
+                             <p>缴费类目:学杂费</p>
+                             <p>缴费状态:<span class="redfont">已逾期</span></p>
+                        </div>
+                    </div>
+                </div>
+            </li>-->
+ 
+        </ul>
+    </div>	
+	
+	
+	
+	
+	<footer >
+	     <div class="smalldiv active" onclick="location.href='__CONTROLLER__/main1.html'">未缴费</div>
+	     <div class="smalldiv" onclick="location.href='__CONTROLLER__/main2.html'">已缴费</div>
+	     <div class="smalldiv" onclick="location.href='__CONTROLLER__/main3.html'">个人中心</div>
+	</footer>
+	
+	
+	
+</body>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/zepto.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/vue.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/aui-toast.js" ></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/hy.js"></script>
+<script type="text/javascript">
+ 
+</script>
+</html>

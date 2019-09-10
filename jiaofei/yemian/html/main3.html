@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="{$Think.HOME_URL}/css/aui.css"/>
+    <style>
+    	body{
+    		
+    	}
+    	
+    	header{position:fixed!important;top:0}
+ 
+    	
+    	footer{position:fixed!important;bottom:0;z-index: 999!important;width: 100%;}
+    	
+    	.smalldiv{width: 32.5%;height: 45px;line-height: 45px;display: inline-block;text-align: center;background-color: white;font-size: 16px}
+    	.active{background-color:#03A9F4;color: white;}
+    	    	
+    	
+    	.userInfo{background-color: #03A9F4;width: 100%;height: 200px;text-align: center;position: relative}
+    	.headimg{padding-top: 50px;text-align: center}
+    	.headimg img{width: 95px;height: 95px;border-radius: 50%;display: inline-block;}
+    	.username{text-align: center;font-size: 13px;color: white;padding-top: 8px}
+    </style>
+</head>
+<body>
+	<header class="aui-bar aui-bar-nav">学生缴费</header>
+	
+	
+	<div class="userInfo">
+	   <div class="headimg"><img src="{$Think.HOME_URL}/image/touxiang.jpg" /></div>
+	   <div class="username">姓名:王二妮</div>
+	 
+	
+	</div>
+	
+	
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+ 
+            <li class="aui-list-item aui-list-item-middle" onclick="location.href='userinfo.html'">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    个人资料
+            </li>
+            <li class="aui-list-item" onclick="location.href='updatepwd.html'"> 
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    修改密码
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    费用管理处电话
+                </div>
+            </li>
+        </ul>
+    </div>	
+	
+	
+	
+	<footer >
+	     <div class="smalldiv" onclick="location.href='main1.html'">未缴费</div>
+	     <div class="smalldiv " onclick="location.href='main2.html'">已缴费</div>
+	     <div class="smalldiv active" onclick="location.href='main3.html'">个人中心</div>
+	</footer>	
+	
+</body>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/api.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/vue.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/aui-toast.js" ></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/hy.js"></script>
+<script type="text/javascript">
+ 
+</script>
+</html>

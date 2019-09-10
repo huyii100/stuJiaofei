@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title>用户列表</title>
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/pintuer.css">
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/admin.css">
+<script src="{$Think.PUBLIC_URL}/js/jquery-3.0.0.min.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/pintuer.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/zepto.min.js"></script>
+<style>
+    
+    .greenfont{color: green}
+    .goods_num{color: #0080FF}
+    .tongji{margin-left: 10px;color:red}
+</style>
+</head>
+<body>
+<form method="post" action="" id="listform">
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder">缴费记录列表 {$leimu_name}</strong></div>
+    <div class="padding border-bottom">
+      <!--       搜索部分-->   
+      <ul class="search" style="padding-left:10px;">
+        <li class="greenfont">搜索：</li>
+        <li>
+                  搜索关键字：
+          <input id="searchval" type="text" placeholder="输入姓名、学号、联系电话" name="searchval" class="input" style="width:220px; line-height:17px;display:inline-block" />
+          <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a>
+        </li>
+      </ul>
+       <!--        筛选部分-->
+      <ul class="search" style="padding-left:10px;margin-top: 10px">
+        <li class="greenfont">筛选：</li>
+        <li>缴费状态筛选：
+            <select id="state" name="state" class="input"  style="width:120px; line-height:17px; display:inline-block" onchange="stateOnchange()">
+            <option value="">选择</option>
+            <option value="1">已缴费</option>
+            <option value="2">未缴费</option>
+          </select>
+        </li>   
+ 
+        <a href="javascript:void(0)" class="button border-main icon-search" onclick="shaixuan()" > 筛选</a>
+        
+        <span class="tongji"> 应缴：{$money_zong}元 </span>
+        <span class="tongji"> 已缴：{$money_yijiao}元 </span>
+        <span class="tongji"> 未缴：{$money_weijiao}元</span>
+        <span class="tongji"> 其中逾期：{$money_yuqi}元 </span>
+        
+      </ul> 
+    </div>
+    <table class="table table-hover text-center">
+      <tr>
+        <th style="text-align:left; padding-left:20px;">序号</th>
+        <th>ID</th>
+        <th>缴费人</th>
+        <th>缴费金额</th>
+        <th>学年</th>
+        <th>所属类目</th>
+        <th>缴费开始时间</th>
+        <th>缴费结束时间</th>
+        <th>缴费状态</th>
+        <th>操作</th>
+      </tr>
+        <?php  for($i=0;$i<count($data);$i++){   ?>
+        <tr>
+          <td style="text-align:left; padding-left:20px;">
+              {$i+1}
+<!--              <if condition="$data[$i]['status'] eq 2">  
+                   <input type="checkbox" name="id[]" value="" />
+             </if>-->
+          </td>
+          <td>{$data[$i]['payorder_id']}</td>
+          <td>{$data[$i]['user_name']}</td>
+          <td>{$data[$i]['money']}</td>
+          <td>{$data[$i]['qishu']}</td>
+          <td>{$data[$i]['leimu_name']}</td>
+          <td>{$data[$i]['begin_date']}</td>
+          <td>{$data[$i]['end_date']}</td>
+          <td>{$data[$i]['status']==2?'<font color="#FB1330">未缴费</font>':'<font color="#00CC99">已缴费</font>'}</td>
+                <td><div class="button-group"> 
+       
+                       <a class="button border-main"  href="__CONTROLLER__/addOrder/payorder_id/{$data[$i]['payorder_id']}"  onclick="window.open(this.href,'_blank','scrollbars=1,resizable=0;height=900,width=800,top=190,left=350');return false" ><span class="icon-edit"></span>编辑</a>
+                      <if condition="$data[$i]['status'] eq 2">
+                        <a class="button border-green" href="__CONTROLLER__/orderKG/payorder_id/{$data[$i]['payorder_id']}/status/1" ><span class="icon-user-md"></span>变更为已缴费</a>
+                      
+                       <a class="button border-red" onclick="del({$data[$i]['payorder_id']})" ><span class="icon-trash-o"></span> 删除</a> 
+                     </if>  
+<!--                       <a class="button border-red" onclick="chongzhiPwd({$data[$i]['user_id']})" ><span class="icon-user-md"></span>重置密码</a>-->
+                       <a class="button border-main" href="#" onclick="details({$data[$i]['payorder_id']})"><span class="icon-eye"></span> 详情</a>
+              </div></td>
+             
+        </tr>
+       <?php  }  ?> 
+        <tr>
+<!--            <td style="text-align:left; padding:19px 0;padding-left:20px;"><input type="checkbox" id="checkall"/>
+               全选 
+            </td>-->
+            <td colspan="7" style="text-align:left;padding-left:0;">
+<!--                 <a href="__MODULE__/Excel/orderUpExcel" class="button border-red" style="padding:5px 15px;">批量变更为已缴费</a> -->
+<!--                 <a href="__MODULE__/Excel/orderUpExcel" class="button border-red icon-user-md" style="padding:5px 15px;" onclick="window.open(this.href,'_blank','scrollbars=1,resizable=0;height=900,width=800,top=190,left=350');return false"> 导入Excel数据</a> 
+                 <a class="button border-main"  href="__MODULE__/Excel/exportOrderExcel"  onclick="window.open(this.href,'_blank','scrollbars=1,resizable=0;height=900,width=800,top=190,left=350');return false" >导出</a>-->
+            </td>       
+       </tr>
+      <tr>
+        <td colspan="8">
+            <div class="pagelist">
+                {$page}
+            </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</form>
+<script type="text/javascript">
+
+//全选
+$("#checkall").click(function(){ 
+  $("input[name='id[]']").each(function(){
+	  if (this.checked) {
+		  this.checked = false;
+	  }
+	  else {
+		  this.checked = true;
+	  }
+  });
+})
+
+
+
+ //进行搜索
+function changesearch(){
+    
+    var searval=$('#searchval').val();
+    if(searval==''){
+        alert('请输入需要搜索的关键字');
+        return;
+    }
+    window.location.href='__CONTROLLER__/orderList/searchval/'+searval;
+} 
+ 
+ 
+ //筛选
+ function shaixuan(){
+    var state=$('#state').val();
+    if(state==''){
+        alert('请选择需要筛选的内容');
+        return;
+    }     
+    window.location.href='__CONTROLLER__/orderlist/status/'+state; 
+ }
+
+
+
+
+
+ 
+//重置密码
+function chongzhiPwd(user_id){
+   	if(confirm("是否确定要将该用户的密码重置为123456？")){
+            var url="__CONTROLLER__/chongzhiPwd/user_id/"+user_id;
+            window.location.href=url;	   
+	}     
+}
+
+//删除缴费记录
+function del(payorder_id){
+   	if(confirm("是否确定要删除该缴费记录？")){
+            var url="__CONTROLLER__/delOrder/payorder_id/"+payorder_id;
+            window.location.href=url;	   
+	}    
+}
+
+function details(payorder_id){
+
+                  window.open('__CONTROLLER__/orderdetails/payorder_id/'+payorder_id,'newwindow','height=900,width=800,top=190,left=350,toolbar=no,menubar\n\
+                                              =no,scrollbars=yes,resizable=no, location=no,status=no') 
+    
+}
+
+</script>
+</body>
+</html>

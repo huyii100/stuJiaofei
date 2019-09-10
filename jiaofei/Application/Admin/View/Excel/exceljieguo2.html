@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title>Excel导入结果</title>
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/pintuer.css">
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/admin.css">
+<script src="{$Think.PUBLIC_URL}/js/jquery.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/pintuer.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/zepto.min.js"></script> 
+</head>
+
+<style>
+    table tr td{text-align: center;height:50px;line-height:50px}
+</style>
+
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>excel导入结果</strong></div>
+  <div class="body-content">
+ 
+ 
+ 
+  
+             <if condition="$isdaook">
+                 <p align="left" style="color:red;margin-left: 50px;"> 数据导入成功</p>
+                 
+                 
+                   <if condition="$failData">
+                        <p align="left" style="color:red;margin-left: 50px;" >除以下数据 其他数据均导入成功</p>
+                        <table border="0" width="80%">
+                                <tr>
+                                  <th>身份证号</th>
+                                  <th>学期</th>
+                                  <th>缴费金额</th>
+                                  <th>所属类目</th>
+                                  <th>失败理由</th>
+                                </tr>
+                             <?php  for($i=0;$i<count($failData);$i++){   ?>   
+                                <tr>
+                                  <td>{$failData[$i]['A']}</td>
+                                  <td>{$failData[$i]['B']}</td>
+                                  <td>{$failData[$i]['E']}</td>
+                                  <td>{$failData[$i]['F']}</td>
+                                  <td>{$failData[$i]['liyou']}</td>
+                                </tr> 
+                             <?php  }  ?>    
+                        </table>
+                    </if>    
+             </if>
+        
+        
+        
+        
+ 
+    </form>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+   //设置select选中的
+ 
+  $('#xueyuan_id').val({$now_xueyuan_id})   
+ 
+
+ 
+ 
+ 
+ 
+
+</script>
+</html>

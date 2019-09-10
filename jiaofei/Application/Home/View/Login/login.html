@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="{$Think.HOME_URL}/css/aui.css"/>
+    <style>
+    	body{
+    		
+    	}
+    	#loginKuang{
+    	   width: 80%;
+    	   margin-top: 80px;
+    	   margin-left: 10%
+    	
+    	}
+    	
+    	.footdiv{
+    	   width: 80%;
+    	   margin-left: 10%;
+    	   margin-top: 20px
+    	}
+    	
+    	.rightBtn{
+    	   text-align: right;
+    	   color: #8E8E8E;
+    	   font-size: 14px;
+    	   margin-top: 8px
+    	
+    	}
+    	
+    </style>
+</head>
+<body>
+	
+<header class="aui-bar aui-bar-nav">缴费</header>
+	
+<form method="post"  action="" >  
+    
+    <div id="loginKuang" class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-form-list">
+        
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+ 
+                    <div class="aui-list-item-input">
+                        <input type="number" placeholder="输入身份证号" name="sfz_num">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-input">
+                        <input type="password" placeholder="输入密码" name="password">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>	
+	
+ <div class="footdiv">
+ 
+    <button class="aui-btn aui-btn-info aui-btn-block" >登录</button>
+    <div class="rightBtn" onclick="location.href='__CONTROLLER__/forgetpwd.html'">忘记密码?</div>
+ 
+ </div>	
+	
+</form>	
+	
+	
+</body>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/zepto.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/vue.js"></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/aui-toast.js" ></script>
+<script type="text/javascript" src="{$Think.HOME_URL}/script/hy.js"></script>
+<script type="text/javascript">
+ 
+  
+ 
+ 
+ 
+ 
+ 
+</script>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title>添加缴费记录</title>
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/pintuer.css">
+<link rel="stylesheet" href="{$Think.PUBLIC_URL}/css/admin.css">
+<script src="{$Think.PUBLIC_URL}/js/jquery.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/pintuer.js"></script>
+<script src="{$Think.PUBLIC_URL}/js/zepto.min.js"></script> 
+</head>
+
+<style>
+    
+</style>
+
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加缴费记录</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action=""  enctype="multipart/form-data" >  
+ 
+      <div class="form-group">
+        <div class="label">
+          <label>缴费人：</label>
+        </div>
+        <div class="field">
+          <if condition="$result">   
+             <input id="user_name" type="text" class="input w50" value="{$result.user_name}" maxlength="6" name="" readonly  data-validate="required:请选择缴费人"  placeholder="请选择" />
+          <else/>
+             <input id="user_name" type="text" class="input w50" value="{$result.user_name}" maxlength="6" name="" readonly  data-validate="required:请选择缴费人"  placeholder="请选择"  onclick="toselect()" />
+          </if>
+          
+          <div class="tips"></div>
+        </div>
+      </div>
+        
+        <!--隐藏域，用于存用户id -->
+       <input id="user_id" type="hidden" name="user_id"  value="{$result.user_id}" /> 
+        
+        
+        
+  
+      <div class="form-group">
+        <div class="label">
+          <label>学年：</label>
+        </div>
+        <div class="field">
+          <input type="tel" class="input w50" value="{$result.qishu}"  name="qishu" data-validate="required:请输入学期" />
+          <div class="tips"></div>
+        </div>
+      </div>               
+        
+
+      <div class="form-group">
+        <div class="label">
+          <label>缴费开始时间：</label>
+        </div>
+        <div class="field">
+          <input type="date" class="input w50" value="{$result.begin_date}"  name="begin_time" data-validate="required:请输入缴费开始时间" />
+          <div class="tips"></div>
+        </div>
+      </div>          
+        
+       <div class="form-group">
+        <div class="label">
+          <label>缴费结束时间：</label>
+        </div>
+        <div class="field">
+          <input type="date" class="input w50" value="{$result.end_date}"  name="end_time" data-validate="required:请输入缴费结束时间" />
+          <div class="tips"></div>
+        </div>
+      </div>           
+        
+ 
+      <div class="form-group">
+        <div class="label">
+          <label>缴费金额：</label>
+        </div>
+        <div class="field">
+          <input type="tel" class="input w50" value="{$result.money}"   name="money"  data-validate="required:请输入缴费金额"/>
+          <div class="tips"></div>
+        </div>
+      </div>  
+ 
+        
+        
+         <div class="form-group">
+          <div class="label">
+            <label>所属类目：</label>
+          </div>
+          <div class="field">
+            <select id="leimu_id" name="leimu_id" class="input w50"  value=""  data-validate="required:请选择所属类目">
+ 
+               <?php  for($i=0;$i<count($leimuList);$i++){   ?> 
+                   <option value="{$leimuList[$i].leimu_id}">{$leimuList[$i].leimu_name}</option>
+               <?php  }  ?>
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>           
+        
+          <div class="form-group">
+          <div class="label">
+            <label>缴费状态：</label>
+          </div>
+          <div class="field">
+            <select id="status" name="status" class="input w50"  value=""  data-validate="required:请选择缴费状态">
+                   <option value="1">已缴费</option>
+                   <option value="2">未缴费</option>
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>            
+ 
+      <div class="form-group">
+        <div class="label">
+          <label>备注：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$result.beizhu}"  name="beizhu"  />
+          <div class="tips"></div>
+        </div>
+      </div>          
+
+      
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+            <button class="button bg-main icon-check-square-o" type="submit" onclick="return tijiao()"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+   //设置select选中的
+ 
+$('#leimu_id').val({$now_leimu_id})   
+$('#status').val({$result.status})  
+
+
+  function toselect(){
+ 
+      url='__MODULE__/User/userList/isOrder/true' 
+  
+
+      window.open(url,'newwindow','height=900,width=800,top=190,left=350,toolbar=no,menubar\n\
+                                              =no,scrollbars=yes,resizable=no, location=no,status=no') 
+  } 
+
+
+   //被子窗口调用 
+   function isSelectOk(user_id,user_name){
+       //alert('我是父窗口'+id)
+       //alert('我是父窗口'+name)
+       $('#user_name').val(user_name)
+       $('#user_id').val(user_id) 
+   }
+
+
+var user_name=$('#user_name')
+var xueqi=$('input[name="xueqi"]')
+var begin_time=$('input[name="begin_time"]')
+var end_time=$('input[name="end_time"]')
+var money=$('input[name="money"]')
+
+function tijiao(){   
+   if(user_name.val()==''){
+       alert('请选择缴费人');
+       return false
+   } 
+   if(xueqi.val()==''){
+       alert('请输入学期');
+       return false
+   }     
+   if(begin_time.val()==''){
+       alert('请选择缴费开始时间');
+       return false
+   }      
+   if(end_time.val()==''){
+       alert('请选择缴费结束时间');
+       return false
+   }     
+   if(begin_time.val()>=end_time.val()){
+       alert('结束时间需大于开始时间');
+       return false      
+   }
+   if(money.val()==''){
+       alert('请输入金额');
+       return false
+   }        
+   if(!/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(money.val())){
+       alert('请输入正确的金额格式');
+       return false
+   }     
+   
+ 
+    return true;
+ 
+   
+}
+
+
+
+</script>
+</html>
